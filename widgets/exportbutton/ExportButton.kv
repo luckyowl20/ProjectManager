@@ -1,0 +1,117 @@
+<ExportPopupContent>:
+    orientation: 'vertical'
+    size_hint_y: None
+    size_hint_x: None
+    width: '600dp'
+    height: '500dp'
+    export_type_label: export_type_label
+    export_path_label: export_path_label
+
+    # for exporting with a file name
+    export_filename_label: export_filename_label
+    filename_field: filename_field
+
+    MDBoxLayout:
+        size_hint: 1, None
+        height: '2dp'
+        md_bg_color: app.theme_cls.primary_light
+
+    Label:
+        size_hint_y: None
+        height: "20dp"
+
+    MDLabel:
+        theme_text_color: "Primary"
+        markup: True
+        text: "[b]Export path:[/b]"
+        size_hint_y: None
+        height: '20dp'
+
+    MDSeparator:
+
+    MDBoxLayout:
+        orientation: 'horizontal'
+        adaptive_height: True
+        MDLabel:
+            id: export_path_label
+            theme_text_color: "Primary"
+            text: ""
+
+        TooltipMDIconButton:
+            id: export_path_button
+            tooltip_text: "Select path"
+            icon: "folder-search"
+            on_release: root.change_export_path()
+
+    Label:
+        size_hint_y: None
+        height: '50dp'
+
+    MDLabel:
+        id: export_type_label
+        markup: True
+        text: "[b]Export to:[/b]"
+        theme_text_color: "Primary"
+        size_hint_y: None
+        height: '20dp'
+
+    MDSeparator:
+
+    Label:
+        size_hint_y: None
+        height: "15dp"
+    MDChooseChip:
+        MDChip:
+            label: "Folder"
+            icon: "folder"
+            selected_chip_color: app.theme_cls.primary_light
+            callback: root.export_type_selected
+
+        MDChip:
+            label: ".zip File"
+            icon: "folder-zip"
+            selected_chip_color: app.theme_cls.primary_light
+            callback: root.export_type_selected
+
+        MDChip:
+            label: "Google Drive"
+            icon: "google-drive"
+            selected_chip_color: app.theme_cls.primary_light
+            callback: root.export_type_selected
+
+    Label:
+        size_hint_y: None
+        height: '50dp'
+
+    MDLabel:
+        id: export_filename_label
+        markup: True
+        text: "[b]Original export file name:[/b]"
+        theme_text_color: "Primary"
+        size_hint_y: None
+        height: '20dp'
+
+    MDSeparator:
+
+    Label:
+        size_hint_y: None
+        height: '8dp'
+
+    MDTextField:
+        id: filename_field
+        hint_text: "Click to edit filename"
+        color_mode: 'custom'
+        line_color_focus: app.theme_cls.text_color
+        current_hint_text_color: app.theme_cls.primary_color
+        pos_hint: {'center_y': 0.5}
+        on_text: root.filename_text_edited(self.text)
+        on_text_validate: root.filename_text_edited(self.text)
+
+    Label:
+
+    MDLabel:
+        text: '[size=14][b]Note:[/b] [i]The filename cannot include any of the following characters: \ / : * ? " < > | or . Using these characters will cause your file to not save and crash Project Manager'
+        theme_text_color: "Secondary"
+        size_hint_y: None
+        height: '75dp'
+        markup: True

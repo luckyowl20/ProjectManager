@@ -1,0 +1,62 @@
+<GoogleRightContainer@IRightBodyTouch+MDBoxLayout>:
+   #  adaptive_height: True
+
+<GoogleProjectEntry>:
+    id: main_label
+    on_release: root.project_selected(self)
+
+    IconLeftWidget:
+        icon: 'folder-open'
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        on_release: root.open_selected_folder(main_label)
+
+<GoogleExportPopupContent>:
+    projects_list: projects_list
+    spinner_container: spinner_container
+    main_layout: main_layout
+    selected_folder_label: selected_folder_label
+
+    size_hint: None, None
+    size: '800dp', '500dp'
+    orientation: 'horizontal'
+    MDBoxLayout:
+        id: main_layout
+        orientation: 'vertical'
+        MDLabel:
+            text: "[b][u]Select folder to upload to[/u][/b]"
+            theme_text_color: "Primary"
+            markup: True
+            size_hint_y: None
+            height: '20dp'
+
+        MDLabel:
+            id: selected_folder_label
+            text: "[b]Selected folder: [/b][i]My Drive[/i]"
+            theme_text_color: "Primary"
+            markup: True
+            size_hint_y: None
+            height: '20dp'
+
+        MDBoxLayout:
+            adaptive_height: True
+            id: spinner_container
+            MDSpinner:
+                size_hint: None, None
+                size: dp(46), dp(46)
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+        MDBoxLayout:
+            orientation: 'vertical'
+            size_hint_x: 0.5
+            ScrollView:
+                MDList:
+                    id: projects_list
+
+        Label:
+            size_hint_y: None
+            height: '10dp'
+
+        MDRaisedButton:
+            text: "My Drive"
+            color: app.theme_cls.primary_color
+            on_release: root.back_project()

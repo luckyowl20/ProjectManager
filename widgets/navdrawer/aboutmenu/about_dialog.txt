@@ -1,0 +1,27 @@
+[u][i]This application is developed by Matthew Schneider was designed to track school/personal projects.[/u][/i]
+
+This software includes many features that help you easily track many aspects of your projects, for example, you can track the following among other things:
+    - The day you started the project
+    - The day you completed the project
+    - Your most recent progress on a given project
+    - A description of your project
+    - A To-Do list for whatever you may need to track
+    - External resources for your project
+    - Imports and Exports to Google Drive
+    - An easy way to manage all files associated with a project
+
+The inspiration for this application came from my need for a central piece of local software I could access without the internet to manage my many projects. This project was started on May 26, 2020, at 2:00 am. Since then I have been recording the development of this app on twitch.tv where I have logged 64+ hours of development time as of June 11, 2020.
+
+In the process of developing this software, I have learned many things about GUI development and how to use a variety of python libraries. The main library that this application uses is the Kivy library and a branch of that library called KivyMD which implements Google's Material Design theory.
+
+Material Design is a philosophy that most GUI elements should be smooth, simple, and easy to understand their function at a glance. For example, if you have two buttons next to each other, the button whos function is more important should stand out more. This idea was implemented in every single popup menu in this application. Open the appearance menu and observe the "CLOSE" and "SAVE" buttons. Save is a much more important button and should be given visual priority.
+
+Material Design applies to the general theme of products as well. Animations should be smooth and not unnecessary. Icons and images should serve a purpose while also being simple. The icons used for a large portion of the buttons in this software came from a list of community created Material Design icons based on Google's set of these icons. These icons are meant to convey a message at a glance, for example, the export icon. The folder with an upwards facing arrow indicates that it will move a folder somewhere. On its own, this message could be vague but it does not necessarily need to be clear for the user to understand its purpose.
+
+A goal I tried to work towards when developing this project was future-proofing my code. Last time I used the Kivy library for my TSA software development project my code quickly became self-dependent. It became impossible to re-work features without the entire program falling apart. To fix this, I made sure that everything in this application has as few dependencies as possible. By doing this, I can change single widgets without risking the integrity of the entire application. In hindsight, this makes sense to do but developing a strategy for consistently implementing this idea is not as easy as I thought it would be.
+
+The most complex function of this application is the dynamic file loading structure. For every valid project in the projects folder, conflicting file names are resolved automatically and paths directing to that project are changed accordingly. If a project lacks critical files to be considered a valid project, it is not loaded. This required a tricky and strategic implementation of the OS and JSON libraries.
+
+Another complex feature is the ability to change the appearance of the application. When you choose one of the many themes, KivyMD carries out the duty of changing the color of most of the elements. However, some critical pieces are skipped. Tracking these skipped elements and updating them to your chosen theme required a lot of redundant, cross-module code to ensure that the theme of the app stays consistent.
+
+[size=14][i]This about page was last updated on 6/25/20[/size][/i]

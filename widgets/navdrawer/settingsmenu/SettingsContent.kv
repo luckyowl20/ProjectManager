@@ -1,0 +1,26 @@
+## for hamburger menu
+<SettingsContent>:
+    orientation: 'vertical'
+    # adaptive_height: True
+    size_hint_y: None
+    height: '114dp'
+
+    ScrollView:
+        do_scroll_x: False
+
+        MDList:
+            id: settings_list
+            orientation: 'vertical'
+
+            OneLineIconListItem:
+                text: "Appearance"
+                on_release: root.appearance_menu()
+
+            OneLineIconListItem:
+                text: "Preferences"
+                on_release: root.preferences_menu()
+
+    MDBoxLayout:
+        size_hint_y: None
+        height: '2dp'
+        md_bg_color: app.theme_cls.primary_color

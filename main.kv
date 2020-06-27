@@ -1,0 +1,61 @@
+#:import SwapTransition kivy.uix.screenmanager.SwapTransition
+#:import ContentNavigationDrawer widgets.navdrawer.ContentNavigationDrawer
+
+
+<TooltipMDIconButton@MDIconButton+MDTooltip>:
+
+
+<StyleContainer@IRightBodyTouch+MDBoxLayout>:
+    adaptive_width: True
+
+
+<Spacer@Label>:
+    size_hint_y: None
+    height: '5dp'
+
+
+<ColorBar@BoxLayout>:
+    # Widget to create a separator between other widgets
+    orientation: 'vertical'
+    size_hint_y: None
+    height: '15dp'
+
+    # Blank label
+    Label:
+        size_hint_y: None
+        height: '3dp'
+
+    # Black label
+    Label:
+        size_hint_y: None
+        height: '2dp'
+
+        # Making the canvas black colored
+        canvas:
+            Color:
+                rgba: app.theme_cls.primary_light
+            Rectangle:
+                pos: self.x - 5, self.y
+                size: self.width + 10, self.height
+
+    Label:
+        size_hint_y: None
+        height: '5dp'
+
+
+<MainScreen>:
+
+    NavigationLayout:
+        id: nav_layout
+
+        WindowManager:
+            id: window_manager
+            nav_drawer: nav_drawer
+
+        MDNavigationDrawer:
+            id: nav_drawer
+
+            ContentNavigationDrawer:
+                id: content_drawer
+                window_manager: window_manager
+                nav_drawer: nav_drawer

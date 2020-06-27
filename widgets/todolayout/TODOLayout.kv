@@ -1,0 +1,123 @@
+<TODOCheckItem>:
+    item_checkbox: item_checkbox
+    item_text_field: item_text_field
+    item_close_btn: item_close_btn
+
+    orientation: 'horizontal'
+    adaptive_height: True
+    MDCheckbox:
+        id: item_checkbox
+        halign: 'left'
+        pos_hint: {'center_y': 0.5}
+        size_hint: None, 1
+        width: '40dp'
+        on_state: root.update_check_item()
+
+    MDTextField:
+        id: item_text_field
+        text: ""
+        color_mode: "custom"
+        multiline: True
+        line_color_focus: app.theme_cls.text_color
+        current_hint_text_color: app.theme_cls.primary_color
+        on_focus: root.save_item_text()
+        on_text_validate: root.save_item_text()
+
+    MDIconButton:
+        id: item_close_btn
+        icon: 'close'
+        user_font_size: '20sp'
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        on_release: root.remove_todo_item()
+
+
+<TODOListCard>:
+    todo_title_field: todo_title_field
+    todo_check_items: todo_check_items
+    todo_completion: todo_completion
+
+    orientation: 'vertical'
+    padding: '10dp'
+    adaptive_height: True
+    size_hint_x: 1
+    width: '360dp'
+    canvas:
+        Color:
+            rgba: app.theme_cls.bg_dark if app.theme_cls.theme_style == "Light" else app.theme_cls.bg_light
+
+        RoundedRectangle:
+            pos: self.x - 5, self.y
+            size: self.width + 10, self.height + 5
+            radius: [3]
+
+    # md_bg_color: app.theme_cls.bg_dark if app.theme_cls.theme_style == "Light" else app.theme_cls.bg_light
+
+    MDBoxLayout:
+        orientation: 'horizontal'
+        # adaptive_height: True
+        size_hint_y: None
+        height: 38
+        MDTextField:
+            id: todo_title_field
+            text: "Card title"
+            color_mode: "custom"
+            line_color_focus: app.theme_cls.text_color
+            current_hint_text_color: app.theme_cls.primary_color
+            on_focus: root.save_todo_title()
+            on_text_validate: root.save_todo_title()
+
+        MDIconButton:
+            icon: 'delete'
+            pos_hint: {'center_y': 0.75}
+            on_release: root.delete_todo_list()
+
+    MDBoxLayout:
+        id: todo_check_items
+        orientation: 'vertical'
+        adaptive_height: True
+        height: 0
+
+    MDBoxLayout:
+        orientation: 'horizontal'
+        adaptive_height: True
+        MDLabel:
+            id: todo_completion
+            theme_text_color: "Primary"
+            text: ""
+
+        Label:
+        MDBoxLayout:
+            adaptive_width: True
+            adaptive_height: True
+            orientation: 'vertical'
+            Label:
+                size_hint_y: None
+                height: '6dp'
+            MDRaisedButton:
+                text: 'Add item'
+                #size_hint_y: None
+                #height: '50dp'
+                on_release: root.add_check_item()
+
+<TODOLayout>:
+    add_todo_list_button: add_todo_list_button
+    todo_stack_layout: todo_stack_layout
+
+    orientation: 'vertical'
+    MDBoxLayout:
+        adaptive_height: True
+        Label:
+        MDRaisedButton:
+            id: add_todo_list_button
+            text: "Add To-Do list"
+            on_release: root.add_todo_list()
+    Label:
+        size_hint_y: None
+        height: '8dp'
+    ScrollView:
+        MDStackLayout:
+            id: todo_stack_layout
+            adaptive_height: True
+            orientation: 'rl-tb'
+            spacing: '15dp'
+            padding: '15dp'

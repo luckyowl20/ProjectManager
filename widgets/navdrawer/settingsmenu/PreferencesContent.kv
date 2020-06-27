@@ -1,0 +1,151 @@
+<PreferencesContent>:
+
+    default_proj_path_label: default_proj_path_label
+    default_export_path_label: default_export_path_label
+    default_export_type_label: default_export_type_label
+
+    orientation: 'vertical'
+
+    size_hint: None, None
+    height: '500dp'
+    width: '800dp'
+
+    MDBoxLayout:
+        size_hint: None, None
+        height: '2dp'
+        width: dp(self.parent.width - 50)
+        md_bg_color: app.theme_cls.primary_light
+
+    Label:
+        size_hint_y: None
+        height: '30dp'
+
+    MDBoxLayout:
+        orientation: 'horizontal'
+        size_hint: None, None
+        height: '20dp'
+        width: dp(self.parent.width - 50)
+
+        MDLabel:
+            text: "[b]Projects path[/b]"
+            theme_text_color: "Primary"
+            markup: True
+            size_hint_y: None
+            height: '20dp'
+
+        TooltipMDIconButton:
+            tooltip_text: "This is the folder \nwhere all of your \nprojects are stored"
+            icon: 'information-variant'
+            pos_hint: {'center_y': 0.8}
+
+    MDSeparator:
+        size_hint_x: None
+        width: dp(self.parent.width - 50)
+
+    MDBoxLayout:
+        orientation: 'horizontal'
+        adaptive_height: True
+        size_hint_x: None
+        width: dp(self.parent.width - 50)
+
+        MDIconButton:
+            icon: 'pencil'
+            on_release: root.change_project_path()
+
+        MDLabel:
+            id: default_proj_path_label
+            text: "test path"
+            theme_text_color: "Primary"
+
+    Label:
+        size_hint_y: None
+        height: '60dp'
+
+    MDBoxLayout:
+        orientation: 'horizontal'
+        size_hint: None, None
+        height: '20dp'
+        width: dp(self.parent.width - 50)
+
+        MDLabel:
+            text: "[b]Default export folder[/b]"
+            theme_text_color: "Primary"
+            markup: True
+            size_hint_y: None
+            height: '20dp'
+
+        TooltipMDIconButton:
+            tooltip_text: "This is the folder where\nyour exported projects\ngo to by default"
+            icon: 'information-variant'
+            pos_hint: {'center_y': 0.8}
+
+    MDSeparator:
+        size_hint_x: None
+        width: dp(self.parent.width - 50)
+
+    MDBoxLayout:
+        orientation: 'horizontal'
+        adaptive_height: True
+        size_hint_x: None
+        width: dp(self.parent.width - 50)
+
+        MDIconButton:
+            icon: 'pencil'
+            on_release: root.change_export_path()
+
+        MDLabel:
+            id: default_export_path_label
+            text: "test default path"
+            theme_text_color: "Primary"
+
+    Label:
+        size_hint_y: None
+        height: '60dp'
+
+    MDBoxLayout:
+        orientation: 'horizontal'
+        size_hint: None, None
+        height: '20dp'
+        width: dp(self.parent.width - 50)
+
+        MDLabel:
+            id: default_export_type_label
+            text: "Default export format"
+            theme_text_color: "Primary"
+            markup: True
+            size_hint_y: None
+            height: '20dp'
+
+        TooltipMDIconButton:
+            tooltip_text: "This is the default \nformat your project\nis exported in"
+            icon: 'information-variant'
+            pos_hint: {'center_y': 0.8}
+
+    MDSeparator:
+        size_hint_x: None
+        width: dp(self.parent.width - 50)
+
+    Label:
+        size_hint_y: None
+        height: "15dp"
+
+    MDChooseChip:
+        MDChip:
+            label: "Folder"
+            icon: "folder"
+            selected_chip_color: app.theme_cls.primary_light
+            callback: root.export_type_selected
+
+        MDChip:
+            label: ".zip File"
+            icon: "folder-zip"
+            selected_chip_color: app.theme_cls.primary_light
+            callback: root.export_type_selected
+
+        MDChip:
+            label: "Google Drive"
+            icon: "google-drive"
+            selected_chip_color: app.theme_cls.primary_light
+            callback: root.export_type_selected
+
+    Label:

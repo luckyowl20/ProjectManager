@@ -1,0 +1,298 @@
+#:import MyViewer widgets.myviewer.MyViewer
+#:import TODOLayout widgets.todolayout.TODOLayout
+
+
+<MainLayout>:
+    id: main_layout
+
+    info_layout: info_layout
+    desc_field: desc_field
+    save_field: save_field
+    complete_field: complete_field
+    progress_bar: progress_bar
+    progress_label: progress_label
+    recent_label: recent_label
+
+    # not needed anymore
+    # project_edit_button: project_edit_button
+    #
+
+    project_open_button: project_open_button
+    project_label: project_label
+    continue_btn: continue_btn
+    project_path_label: project_path_label
+    selection_button: selection_button
+    select_label: select_label
+    viewer: viewer
+    links_layout: links_layout
+    todo_layout: todo_layout
+
+    orientation: 'vertical'
+    #md_bg_color: [0, 1, 0, 0.5]
+    padding: 10
+
+    size: dp(self.width), dp(self.minimum_height + 100 - 12)
+    size_hint: 1, None
+
+    # Layout for under title
+    MDBoxLayout:
+        orientation: 'horizontal'
+
+        # First column of layouts
+        MDBoxLayout:
+            id: test_id
+            adaptive_height: True
+            size_hint_x: None
+            width: 300
+            orientation: 'vertical'
+
+            # Save layout
+            MDBoxLayout:
+                size_hint_x: 0.75
+
+                MDLabel:
+                    markup: True
+                    text: "[b]Started:[/b]"
+                    theme_text_color: 'Primary'
+
+                MDTextField:
+                    id: save_field
+                    text: "Start Date"
+
+                    helper_text_mode: "on_focus"
+                    helper_text: "Click away to save"
+
+                    color_mode: "custom"
+                    line_color_focus: app.theme_cls.text_color
+                    current_hint_text_color: app.theme_cls.primary_color
+
+                    size_hint_y: None
+                    on_focus: root.save_start()
+
+            # Completion layout
+            MDBoxLayout:
+                size_hint_x: 0.75
+
+                MDLabel:
+                    markup: True
+                    text: "[b]Completed:[/b]"
+                    theme_text_color: 'Primary'
+
+                MDTextField:
+                    id: complete_field
+                    text: "Completion Date"
+
+                    helper_text_mode: "on_focus"
+                    helper_text: "Click away to save"
+
+                    color_mode: "custom"
+                    line_color_focus: app.theme_cls.text_color
+                    current_hint_text_color: app.theme_cls.primary_color
+
+                    size_hint_y: None
+                    on_focus: root.save_completion()
+
+        # Second column layout
+        MDBoxLayout:
+            adaptive_height: True
+            orientation: 'vertical'
+
+            MDBoxLayout:
+                orientation: 'horizontal'
+                MDLabel:
+                    id: progress_label
+                    theme_text_color: 'Primary'
+                    #text: f"[b]Progress: {progress_bar.value}%[/b]"
+                    markup: True
+                    size_hint_x: None
+                    width: '135dp'
+                MDProgressBar:
+                    id: progress_bar
+                    value:
+                    color: app.theme_cls.primary_color
+                    size_hint_x: None
+                    width: '250dp'
+
+                TooltipMDIconButton:
+                    icon: 'arrow-up'
+                    on_release: root.update(2.5)
+                    tooltip_text: "Increase progress"
+
+                TooltipMDIconButton:
+                    icon: 'arrow-down'
+                    on_release: root.update(-2.5)
+                    tooltip_text: "Decrease progress"
+
+            MDLabel:
+                id: recent_label
+                markup: True
+                text: ""
+                theme_text_color: 'Primary'
+
+    Spacer:
+        height: '10dp'
+
+
+    MDBoxLayout:
+        adaptive_height: True
+
+        # Layout containing the description field, needed to package the ScrollView in a specific size
+        MDBoxLayout:
+            id: info_layout
+
+            adaptive_height: True
+            size_hint: 0.5, None
+            #width: '500dp'
+            height: root.get_height()
+
+            #md_bg_color: [1, 1, 1, 1]
+            orientation: 'vertical'
+
+            ScrollView:
+                size_hint_y: 0.6
+
+                do_scroll_x: False
+                do_scroll_y: True
+                MDTextField:
+                    id: desc_field
+                    multiline: True
+                    text: "Type a description here!"
+
+                    helper_text_mode: "on_focus"
+                    helper_text: "Click outside this text box to save your work"
+
+                    color_mode: "custom"
+                    hint_text: "Click here to edit description"
+                    line_color_focus: app.theme_cls.text_color
+                    current_hint_text_color: app.theme_cls.primary_color
+
+                    size_hint_y: None
+
+                    on_focus: root.save_text()
+                    on_text_validate: root.save_text()
+            Label:
+                size_hint_y: 0.1
+
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint: 1, 1
+                MDBoxLayout:
+                    size_hint_y: None
+
+                    height: project_button_layout.height if project_button_layout.height >= project_path_label.height else project_path_label.height
+
+                    MDBoxLayout:
+                        id: project_button_layout
+                        orientation: 'vertical'
+                        size_hint: None, None
+                        width: '50dp'
+                        height: '55dp' if 55 >= project_path_label.height else dp(project_path_label.height)
+
+                        Label:
+                            size_hint: None, 1
+
+                        # edit project dir commented out bc its replaced by
+                        #TooltipMDIconButton:
+                        #    id: project_edit_button
+                        #    icon: "folder-edit-outline"
+                        #    tooltip_text: "Edit project directory"
+                        #    #user_font_size: '15dp'
+                        #    size: '50dp', '20dp'
+                        #    on_release: root.change_project_path()
+
+                        # Label:
+                        #     size_hint_y: None
+                        #     height: '10dp'
+
+                        TooltipMDIconButton:
+                            id: project_open_button
+                            icon: "folder-open-outline"
+                            tooltip_text: "Open project directory"
+                            #user_font_size: '20dp'
+                            size: '50dp', dp(project_path_label.height)
+                            on_release: root.open_project()
+
+                        Label:
+                            size_hint: None, 1
+
+                    Button:
+                        id: project_label
+                        markup: True
+                        theme_text_color: 'Primary'
+                        text: f"[b]Project Directory:[/b]"
+                        text_size: self.width, None
+                        size_hint: None, 1
+                        size: '130dp', self.height
+                        background_color: 0, 0, 0, 0
+                        color: app.theme_cls.text_color
+                        on_release: root.select_project_dir()
+
+                    Button:
+                        id: continue_btn
+                        text: ""
+                        tooltip_text: "Show complete directory"
+                        font_size: app.theme_cls.font_styles['Body1'][1]
+                        size_hint: None, None
+                        size: 10, dp(project_label.height)
+                        halign: 'center'
+                        background_color: 0, 0, 0, 0
+                        color: app.theme_cls.text_color
+                        on_release: root.expand_directory()
+
+                    Label:
+                        size_hint: None, 1
+                        width: '5dp'
+
+                    MDLabel:
+                        id: project_path_label
+                        text: ""
+                        theme_text_color: 'Primary'
+                        makrup: True
+                        valign: 'middle'
+                        text_size: self.width, None
+                        size_hint: 1, None
+                        height: self.texture_size[1]
+                        pos_hint: {"center_y": 0.5}
+
+                ColorBar:
+
+                # Selection layout
+                MDBoxLayout:
+                    size_hint_y: None
+                    height: select_label.height
+
+                    TooltipMDIconButton:
+                        id: selection_button
+                        tooltip_text: "No selection made"
+                        #user_font_size: '15dp'
+                        icon: 'window-close'
+                        height: select_label.height
+                        width: '50dp'
+                        on_release: root.open_selection()
+
+                    MDLabel:
+                        id: select_label
+                        multiline: False
+                        markup: True
+                        theme_text_color: 'Primary'
+                        text: "[b]Selection: [/b]None"
+                        text_size: self.width, None
+                        size_hint: 1, None
+                        height: self.texture_size[1]
+
+                MyViewer:
+                    id: viewer
+                    on_selection: root.selection_made(self.selection)
+                    project_path: root.project_path
+
+        Label:
+            size_hint_x: 0.08
+        MDBoxLayout:
+            orientation: 'vertical'
+            LinksLayout:
+                id: links_layout
+            Label:
+                size_hint_y: None
+                height: "35dp"
+            TODOLayout:
+                id: todo_layout

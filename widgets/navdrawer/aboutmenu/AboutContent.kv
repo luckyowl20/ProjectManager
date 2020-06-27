@@ -1,0 +1,42 @@
+#:import GeneralLinkItem widgets.generallinkitem.GeneralLinkItem
+
+<AboutContent>:
+    about_label: about_label
+    orientation: 'vertical'
+    size_hint_y: None
+    height: '400dp'
+    size_hint_x: None
+    width: '800dp'
+    padding: '10dp'
+    ScrollView:
+        MDBoxLayout:
+            orientation: 'vertical'
+            adaptive_height: True
+
+            MDLabel:
+                id: about_label
+                markup: True
+                theme_text_color: "Primary"
+                size_hint_y: None
+                height: self.texture_size[1]
+                text_size: self.size
+                #text: root.get_text()
+
+            MDStackLayout:
+                orientation: 'lr-tb'
+                adaptive_height: True
+                GeneralLinkItem:
+                    text: "Material design website"
+                    link: "https://material.io/design"
+
+                GeneralLinkItem:
+                    text: "Kivy documentation"
+                    link: "https://kivy.org/doc/stable/"
+
+                GeneralLinkItem:
+                    text: "KivyMD documentation"
+                    link: "https://kivymd.readthedocs.io/en/latest/index.html"
+
+                GeneralLinkItem:
+                    text: "My twitch account"
+                    link: "https://www.twitch.tv/luckyowl20"

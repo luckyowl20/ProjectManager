@@ -1,0 +1,945 @@
+<CustomCard@MDBoxLayout>:
+    size_hint: 1, None
+    bgcolor: 0, 0, 0, 0
+    padding: '8dp', 0, 0, 0
+    orientation: 'vertical'
+
+    canvas:
+        Color:
+            rgba: self.bgcolor
+        RoundedRectangle:
+            pos: self.x, self.y
+            size: self.width, self.height
+            radius: [5]
+
+
+<HelpLinkIconListItem>:
+    #text: "test link"
+    on_release: root.open_link()
+    size_hint_x: None
+    width: '400dp'
+    divider: None
+
+    IconLeftWidget:
+        icon: 'open-in-new'
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        on_release: root.open_link()
+
+    DeleteButton:
+        icon: 'delete'
+        on_release: root.delete_link()
+
+
+<HelpPageContent>:
+    link_field: link_field
+    add_link_button: add_link_button
+    links_list: links_list
+
+    orientation: 'vertical'
+
+    padding: '8dp'
+    # Title
+    MDBoxLayout:
+        adaptive_height: True
+        orientation: 'horizontal'
+        canvas.before:
+            Color:
+                rgba: root.get_lighter(app.theme_cls.primary_light, 0.8)
+            RoundedRectangle:
+                pos: self.x - 5, self.y
+                size: self.width + 10, self.height + 5
+                radius: [5]
+        MDLabel:
+            id: home_title
+            font_style: 'H3'
+            text: "Project Manager help page"
+            color: app.theme_cls.text_color
+            text_size: self.size[0] - 5, self.size[1]
+            halign: 'left'
+            height: self.font_size * 1.3
+            size_hint: 1, None
+
+    # Subtitle
+    MDBoxLayout:
+        orientation: 'horizontal'
+        adaptive_height: True
+        canvas.before:
+            Color:
+                rgba: root.get_lighter(app.theme_cls.primary_light, 0.6)
+            RoundedRectangle:
+                pos: self.x - 5, self.y
+                size: self.width + 10, self.height
+                radius: [5]
+
+        MDLabel:
+            id: home_subtitle
+            font_style: 'H4'
+            text: "Version: 1.0.0"
+            color: app.theme_cls.text_color
+            text_size: self.size[0] + 5, self.size[1] - 5
+            halign: 'left'
+            height: self.font_size * 1.33
+            size_hint: 1, None
+
+    ScrollView:
+        MDBoxLayout:
+            orientation: 'vertical'
+            adaptive_height: True
+            padding: 0, '8dp', 0, 0
+            spacing: '10dp'
+            id: help_card_list
+
+            # Editing subtitle/titles
+            CustomCard:
+                bgcolor: app.theme_cls.bg_light
+                height: '300dp'
+
+                MDLabel:
+                    text: "Editing titles/subtitles"
+                    theme_text_color: "Primary"
+                    size_hint_y: None
+                    height: '50dp'
+                    font_style: 'H6'
+                    pos_hint: {'center_y': 0.5}
+
+                MDSeparator:
+
+                MDBoxLayout:
+                    orientation: 'horizontal'
+                    MDLabel:
+                        text: "To edit a title or subtitle, click the pencil icon on the right side of the screen. A popup will appear with a field to edit the title/subtitle. \n\nTo the right is what this button looks like!"
+                        theme_text_color: "Primary"
+                        size_hint_x: None
+                        width: '400dp'
+                        halign: 'left'
+                        valign: 'top'
+                        pos_hint: {'center_y': 0.75}
+
+                    Label:
+                        size_hint_x: None
+                        width: '15dp'
+
+                    TooltipMDIconButton:
+                        tooltip_text: "This is the edit button!"
+                        icon: 'lead-pencil'
+                        pos_hint: {'center_y': 0.65}
+
+                    Label:
+                        size_hint_x: None
+                        width: '100dp'
+
+                    MDLabel:
+                        text: "Remember to save your changes before you close the popup!"
+                        theme_text_color: "Primary"
+                        size_hint_x: None
+                        width: '300dp'
+                        halign: 'left'
+                        pos_hint: {'center_y': 0.875}
+
+                    Label:
+                        size_hint_x: None
+                        width: '30dp'
+
+                    MDBoxLayout:
+                        padding: 0, '8dp', 0, '8dp'
+                        Image:
+                            source: "widgets/navdrawer/helpmenu/images/title_save_popup.png"
+                            size: self.texture_size
+                            allow_stretch: True
+
+            # New projects
+            CustomCard:
+                height: '750dp'
+                bgcolor: app.theme_cls.bg_light
+
+                MDLabel:
+                    text: "Creating new projects"
+                    theme_text_color: "Primary"
+                    size_hint_y: None
+                    height: '50dp'
+                    font_style: 'H6'
+                    pos_hint: {'center_y': 0.5}
+
+                MDSeparator:
+
+
+                MDBoxLayout:
+                    orientation: 'horizontal'
+                    size_hint_x: None
+                    width: '800dp'
+                    adaptive_height: True
+
+
+                    MDLabel:
+                        text: "There are 2 ways to create a new project, the Add button on the home page and the Add button on each project page. Clicking these buttons will create a new project. A new folder to contain this project will be automatically created in your Projects folder."
+                        theme_text_color: "Primary"
+                        size_hint_x: None
+                        width: '400dp'
+
+                    Label:
+                        size_hint_x: 0.4
+
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        adaptive_height: True
+
+                        MDLabel:
+                            text: "This is the Add button used to create a new project:"
+                            theme_text_color: "Primary"
+                            size_hint: 1, None
+                            height: '60dp'
+                            halign: 'center'
+
+                        Label:
+                            size_hint_x: None
+                            width: '50dp'
+
+                        MDBoxLayout:
+                            orientation: 'vertical'
+                            adaptive_height: True
+
+                            MDIconButton:
+                                icon: 'plus'
+                                user_font_size: 30
+                                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                            MDLabel:
+                                text: "Add"
+                                theme_text_color: "Primary"
+                                halign: 'center'
+
+                Label:
+                    size_hint_y: None
+                    height: '20dp'
+
+                MDLabel:
+                    size_hint: None, None
+                    text: "[size=14][b]Note:[/b] [i]The name of the new folder is automatically generated, you can change this by editing the name of the folder outside Project Manager. You will have to restart Project Manager to see changes.[/i]"
+                    theme_text_color: "Secondary"
+                    markup: True
+                    size_hint: None, None
+                    size: '500dp', '100dp'
+
+                Label:
+                    size_hint_y: None
+                    height: '20dp'
+
+                MDBoxLayout:
+                    orientation: 'horizontal'
+                    adaptive_height: True
+                    adaptive_width: True
+
+                    MDBoxLayout:
+                        adaptive_width: True
+                        orientation: 'vertical'
+                        Label:
+                        MDLabel:
+                            text: "Once you have created a new project, a new card will appear on the home page. Click on open on this card or use the Back and Next buttons on any project page to navigate to your new project."
+                            theme_text_color: "Primary"
+                            size_hint: None, None
+                            width: '500dp'
+                            height: '60dp'
+
+                        MDLabel:
+                            text: "Here is what the back and next buttons look like:"
+                            theme_text_color: "Primary"
+                            size_hint_y: None
+                            height: '50dp'
+
+
+                        MDBoxLayout:
+                            orientation: 'horizontal'
+                            adaptive_height: True
+                            adaptive_width: True
+
+                            MDBoxLayout:
+                                orientation: 'vertical'
+                                MDIconButton:
+                                    icon: 'arrow-left'
+                                    user_font_size: 30
+                                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+                                MDLabel:
+                                    text: "Back"
+                                    theme_text_color: "Primary"
+                                    halign: "center"
+
+                            MDBoxLayout:
+                                orientation: 'vertical'
+                                MDIconButton:
+                                    icon: 'arrow-right'
+                                    user_font_size: 30
+                                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+                                MDLabel:
+                                    text: "Next"
+                                    theme_text_color: "Primary"
+                                    halign: "center"
+
+                        Label:
+
+                    Label:
+                        size_hint_x: None
+                        width: '200dp'
+
+                    MDLabel:
+                        text: "This is what a project card on the home screen looks like when you add a project:"
+                        theme_text_color: "Primary"
+                        size_hint_x: None
+                        width: '200dp'
+
+                    Label:
+                        size_hint_x: None
+                        width: '50dp'
+
+                    # Example of project card
+                    MDCard:
+                        size_hint: None, None
+                        size: '290dp', '420dp'
+                        padding: '8dp'
+                        orientation: 'vertical'
+
+                        MDLabel:
+                            font_size: '11dp'
+                            size_hint: 1, None
+                            height: '11dp'
+                            theme_text_color: "Secondary"
+                            halign: 'left'
+                            text: "Filename: project1"
+
+                        MDFloatLayout:
+                            size_hint_y: None
+                            height: '150dp'
+                            Image:
+                                id: project_image
+                                pos_hint: {"center_x": 0.4, "center_y": 0.5}
+                                source: "default_image.png"
+                                size_hint: 0.8, 0.9
+
+                            TooltipMDIconButton:
+                                id: image_edit
+                                icon: "image-edit"
+                                pos_hint: {"center_x": 0.93, "center_y": 0.2}
+                                tooltip_text: "Change image"
+
+                        Label:
+                            size_hint_y: None
+                            height: 5
+
+                        MDLabel:
+                            text: "Project title"
+                            theme_text_color: "Secondary"
+                            size_hint_y: None
+                            text_size: self.width, None
+                            height: self.texture_size[1]
+
+                        Label:
+                            size_hint_y: None
+                            height: 2
+
+                        MDSeparator:
+                            height: '2dp'
+
+                        Label:
+                            size_hint_y: None
+                            height: 2
+
+                        MDBoxLayout:
+                            size_hint_y: None
+                            height: '45dp'
+                            orientation: 'horizontal'
+                            MDLabel:
+                                size_hint_x: None
+                                width: '60dp'
+                                text: "0%"
+                                theme_text_color: "Primary"
+
+                            Label:
+                                size_hint_x: None
+                                width: '5dp'
+
+                            MDProgressBar:
+                                value: 0
+                                pos_hint: {"center_y": 0.5}
+
+                        MDLabel:
+                            text: "Project description:"
+                            theme_text_color: "Secondary"
+                            size_hint_y: None
+                            text_size: self.width, None
+                            height: self.texture_size[1]
+
+                        Label:
+                            size_hint_y: None
+                            height: '6dp'
+
+                        MDLabel:
+                            text: "Project description here"
+                            theme_text_color: "Primary"
+                            text_size: self.size
+                            valign: 'top'
+
+                        MDBoxLayout:
+                            size_hint_y: None
+                            MDBoxLayout:
+                                size_hint_y: None
+                                height: open_project.height
+                                TooltipMDIconButton:
+                                    id: delete_project
+                                    icon: "delete"
+                                    tooltip_text: "Delete project"
+                                    pos_hint: {"center_y": 0.5}
+
+                                Label:
+
+                                MDRaisedButton:
+                                    id: open_project
+                                    text: "OPEN"
+
+                Label:
+
+            CustomCard:
+                height: '475dp'
+                bgcolor: app.theme_cls.bg_light
+
+                MDLabel:
+                    text: "Deleting projects"
+                    theme_text_color: "Primary"
+                    size_hint_y: None
+                    height: '50dp'
+                    font_style: 'H6'
+                    pos_hint: {'center_y': 0.5}
+
+                MDSeparator:
+
+
+                MDBoxLayout:
+                    orientation: 'horizontal'
+                    size_hint_y: None
+                    height: '425dp'
+                    padding: 0, '8dp'
+
+                    MDLabel:
+                        text: "To delete a project, go to the home page and press the delete icon button on the project you want to delete. \n\nYou will be asked to confirm that you want to delete this project. \n\n[b]IMPORTANT: Deleting any project will permanently delete any files associated with that project. This action cannot be undone![/b]"
+                        markup: True
+                        theme_text_color: "Primary"
+                        size_hint_x: None
+                        width: '500dp'
+
+
+                    Image:
+                        source: "widgets/navdrawer/helpmenu/images/delete_project_card.PNG"
+                        allow_stretch: True
+
+                    Label:
+                Label:
+
+            # Importing and exporting projects
+            CustomCard:
+                height: '1000dp'
+                bgcolor: app.theme_cls.bg_light
+
+                MDLabel:
+                    text: "Importing and exporting projects"
+                    theme_text_color: "Primary"
+                    size_hint_y: None
+                    height: '50dp'
+                    font_style: 'H6'
+                    pos_hint: {'center_y': 0.5}
+
+                MDSeparator:
+
+                MDLabel:
+                    text: "[b][u]Exporting a project"
+                    theme_text_color: "Primary"
+                    markup: True
+                    size_hint_y: None
+                    height: '30dp'
+
+                Label:
+                    size_hint_y: None
+                    height: '50dp'
+
+                MDBoxLayout:
+                    orientation: 'horizontal'
+
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        adaptive_width: True
+                        adaptive_height: True
+
+                        # export button & text layout
+                        MDBoxLayout:
+                            orientation: 'horizontal'
+                            adaptive_height: True
+                            MDLabel:
+                                text: "To export a project, open that project page and press the export button in the button toolbar."
+                                theme_text_color: "Primary"
+                                size_hint_x: None
+                                width: '200dp'
+
+                            Label:
+                                size_hint_x: None
+                                width: '75dp'
+
+                            MDBoxLayout:
+                                md_bg_color: app.theme_cls.bg_normal
+                                padding: '2dp'
+
+                                adaptive_width: True
+                                adaptive_height: True
+
+                                MDBoxLayout:
+                                    orientation: 'horizontal'
+                                    md_bg_color: app.theme_cls.bg_light
+                                    adaptive_width: True
+                                    adaptive_height: True
+
+                                    MDIconButton:
+                                        icon: 'folder-upload-outline'
+
+                                    MDLabel:
+                                        text: "Export"
+                                        halign: "left"
+                                        pos_hint: {'center_y': 0.5}
+                                        theme_text_color: "Primary"
+                                        size_hint_x: None
+                                        width: '56dp'
+
+
+                        # main text layout
+
+
+                        MDBoxLayout:
+                            orientation: 'vertical'
+                            size_hint: None, None
+                            width: '520dp'
+                            height: '360dp'
+
+                            Label:
+                                size_hint_y: None
+                                height: '12dp'
+
+                            MDLabel:
+                                # TODO add support to export as a given name
+                                text:
+                                    "There are 3 export options: Folder, .zip file, and Google Drive. If you choose to export to Google Drive, a .zip file will be uploaded. \nBy Default, your project will be exported as a .zip file to your Exports folder, which you can change in settings."
+                                theme_text_color: "Primary"
+
+                                markup: True
+                                size_hint_x: None
+                                size_hint_y: None
+                                height: '100dp'
+                                width: '500dp'
+
+                            MDLabel:
+                                text: "[b][size=14]Note:[/b][i] Exporting to .zip files or Google Drive is recommended, especially for large projects with many files. .zip is the default export format.[/i][/size]"
+                                markup: True
+                                theme_text_color: "Secondary"
+                                size_hint_x: None
+                                size_hint_y: None
+                                height: '75dp'
+                                width: '500dp'
+
+                            MDLabel:
+                                text: "[s]You can also change the name of the file when you want to export, the file/folder will be saved with this name. A default name is always generated for you."
+                                markup: True
+                                theme_text_color: "Primary"
+                                size_hint_x: None
+                                size_hint_y: None
+                                height: '100dp'
+                                width: '500dp'
+
+                            Label:
+
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        MDLabel:
+                            text: "This is what the export menu looks like:"
+                            theme_text_color: "Primary"
+                            size_hint_y: None
+                            height: '30dp'
+                            halign: 'center'
+
+                        Image:
+                            source: "widgets/navdrawer/helpmenu/images/export_popup.PNG"
+                            allow_stretch: True
+
+                Label:
+                    size_hint_y: None
+                    height: '50dp'
+
+
+                MDLabel:
+                    text: "[b][u]Importing a project"
+                    theme_text_color: "Primary"
+                    markup: True
+                    size_hint_y: None
+                    height: '30dp'
+
+                Label:
+                    size_hint_y: None
+                    height: '20dp'
+
+                MDBoxLayout:
+                    orientation: 'horizontal'
+
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        adaptive_width: True
+                        adaptive_height: True
+
+                        # import button & text layout
+                        MDBoxLayout:
+                            orientation: 'horizontal'
+                            adaptive_height: True
+                            MDLabel:
+                                text: "You can import a project using the Import buttons on the home page and any project page. The button looks like this:"
+                                theme_text_color: "Primary"
+                                size_hint_x: None
+                                width: '200dp'
+
+                            Label:
+                                size_hint_x: None
+                                width: '75dp'
+
+                            MDBoxLayout:
+                                md_bg_color: app.theme_cls.bg_normal
+                                padding: '2dp'
+
+                                adaptive_width: True
+                                adaptive_height: True
+
+                                MDBoxLayout:
+                                    orientation: 'horizontal'
+                                    md_bg_color: app.theme_cls.bg_light
+                                    adaptive_width: True
+                                    adaptive_height: True
+
+                                    MDIconButton:
+                                        icon: 'folder-download-outline'
+
+                                    MDLabel:
+                                        text: "Import"
+                                        halign: "left"
+                                        pos_hint: {'center_y': 0.5}
+                                        theme_text_color: "Primary"
+                                        size_hint_x: None
+                                        width: '56dp'
+
+                        # main text layout
+                        MDBoxLayout:
+                            orientation: 'vertical'
+                            size_hint: None, None
+                            width: '520dp'
+                            height: '320dp'
+
+                            Label:
+                                size_hint_y: None
+                                height: '12dp'
+
+                            MDLabel:
+                                text: "You can import from the same file types that you can export to (folder, .zip, Google Drive) as long as they contain a project data file. Any file/folder that does not contain this file will not be improted."
+                                theme_text_color: "Primary"
+                                size_hint_x: None
+                                size_hint_y: None
+                                height: '100dp'
+                                width: '500dp'
+
+                            # TODO add support for naming in popup menu
+                            MDLabel:
+                                text: "When you click the improt button, a popup will appear where you can select the file type that you want to import. [s]Here you can name your project, this name will become the name of the folder for the project in your Projects folder"
+                                theme_text_color: "Primary"
+                                markup: True
+                                size_hint_x: None
+                                size_hint_y: None
+                                height: '100dp'
+                                width: '500dp'
+
+                            Label:
+
+                    MDBoxLayout:
+                        orientation: 'vertical'
+
+                        MDLabel:
+                            text: "Here is what the import popup looks like:"
+                            theme_text_color: "Primary"
+                            size_hint: 1, None
+                            height: '30dp'
+                            halign: 'center'
+
+                        Image:
+                            source: "widgets/navdrawer/helpmenu/images/import_popup.png"
+                            allow_stretch: True
+                Label:
+                    size_hint_y: None
+                    height: '8dp'
+
+            # Settings info
+            CustomCard:
+                height: '800dp'
+                bgcolor: app.theme_cls.bg_light
+
+                MDLabel:
+                    text: "Changing settings"
+                    theme_text_color: "Primary"
+                    size_hint_y: None
+                    height: '50dp'
+                    font_style: 'H6'
+                    pos_hint: {'center_y': 0.5}
+
+                MDSeparator:
+
+                MDLabel:
+                    text: "To change settings, press the menu button and click settings. Appearance settings are for changing the theme and style of Project Manager, Preferences are for changing default options."
+                    theme_text_color: "Primary"
+                    size_hint_y: None
+                    height: '25dp'
+
+                Label:
+                    size_hint_y: None
+                    height: '35dp'
+
+                MDLabel:
+                    text: "[b][u]Appearance settings"
+                    theme_text_color: "Primary"
+                    size_hint_y: None
+                    height: '30dp'
+                    markup: True
+
+                Label:
+                    size_hint_y: None
+                    height: '20dp'
+
+                MDBoxLayout:
+                    orientation: 'horizontal'
+
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        adaptive_width: True
+                        size_hint_y: None
+                        height: '310dp'
+
+                        MDLabel:
+                            text: "Appearance settings change the way Project Manager looks"
+                            theme_text_color: "Primary"
+                            size_hint: None, None
+                            height: '100dp'
+                            width: '500dp'
+
+                        MDLabel:
+                            text: "You can choose between 19 different color themes. There is also the option to switch between Light and Dark theme."
+                            theme_text_color: "Primary"
+                            size_hint: None, None
+                            height: '100dp'
+                            width: '500dp'
+                        Label:
+
+                    MDBoxLayout:
+                        orientation: 'vertical'
+
+                        MDLabel:
+                            text: "This is the appearance menu in dark mode with purple theme:"
+                            theme_text_color: "Primary"
+                            size_hint: 1, None
+                            height: '30dp'
+                            halign: 'center'
+
+                        Image:
+                            source: "widgets/navdrawer/helpmenu/images/dark_mode_purple.PNG"
+                            allow_stretch: True
+
+                    MDBoxLayout:
+                        orientation: 'vertical'
+
+                        MDLabel:
+                            text: "This is the appearance menu in light mode with blue theme:"
+                            theme_text_color: "Primary"
+                            size_hint: 1, None
+                            height: '30dp'
+                            halign: 'center'
+
+                        Image:
+                            source: "widgets/navdrawer/helpmenu/images/light_mode_blue.PNG"
+                            allow_stretch: True
+
+                Label:
+                    size_hint_y: None
+                    height: '8dp'
+
+                MDLabel:
+                    text: "[b][u]Preference settings"
+                    theme_text_color: "Primary"
+                    size_hint_y: None
+                    height: '30dp'
+                    markup: True
+
+                MDBoxLayout:
+                    orientation: 'horizontal'
+
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        size_hint_y: None
+                        height: '310dp'
+                        adaptive_width: True
+
+                        MDLabel:
+                            text: "Preference settings allow you to change default values of Project Manager. If you need to change where your projects are saved to, you can change your Projects path and all new projects will be saved there."
+                            theme_text_color: "Primary"
+                            size_hint: None, None
+                            height: '100dp'
+                            width: '500dp'
+
+                        MDLabel:
+                            text: "[size=14][b]Note: [/b][i]To load old projects after you change your projects path has changed, go into the old path and move all projects into the new path and restart Project Manager. This will be an included feature in future versions of Project Manager"
+                            markup: True
+                            theme_text_color: "Secondary"
+                            size_hint: None, None
+                            height: '100dp'
+                            width: '500dp'
+
+                        Label:
+
+
+                    MDBoxLayout:
+                        orientation: 'vertical'
+
+                        MDLabel:
+                            text: "This is the Preferences menu in settings:"
+                            theme_text_color: "Primary"
+                            size_hint: 1, None
+                            height: '30dp'
+                            halign: 'center'
+
+                        Image:
+                            source: "widgets/navdrawer/helpmenu/images/preferences_menu.PNG"
+                            allow_stretch: True
+
+                Label:
+                    size_hint_y: None
+                    height: '8dp'
+
+            # Using widgets
+            CustomCard:
+                bgcolor: app.theme_cls.bg_light
+                height: '1000dp'
+
+                MDLabel:
+                    text: "Using widgets"
+                    theme_text_color: "Primary"
+                    size_hint_y: None
+                    height: '50dp'
+                    font_style: 'H6'
+                    pos_hint: {'center_y': 0.5}
+
+                MDSeparator:
+
+                MDLabel:
+                    text: "[b][u]Add a description"
+                    theme_text_color: "Primary"
+                    size_hint_y: None
+                    height: '30dp'
+                    markup: True
+
+                MDBoxLayout:
+                    orientation: 'horizontal'
+                    size_hint_y: None
+                    height: '70dp'
+
+
+                    MDLabel:
+                        text: "Click on the description field and type to write a description. Your description will save when you click away."
+                        theme_text_color: "Primary"
+                        size_hint: None, None
+                        height: '50dp'
+                        width: '400dp'
+
+                    Label:
+                        size_hint_x: None
+                        width: '50dp'
+
+                    MDTextField:
+                        color_mode: "custom"
+                        hint_text: "Click here to edit description"
+                        line_color_focus: app.theme_cls.text_color
+                        current_hint_text_color: app.theme_cls.primary_color
+
+                    Label:
+
+                Label:
+                    size_hint_y: None
+                    height: '40dp'
+
+                MDLabel:
+                    text: "[b][u]Adding links"
+                    theme_text_color: "Primary"
+                    size_hint_y: None
+                    height: '30dp'
+                    markup: True
+
+                MDBoxLayout:
+                    orientation: 'horizontal'
+                    size_hint_y: None
+                    height: '200dp'
+                    padding: 0, '8dp', 0, 0
+
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        adaptive_width: True
+                        MDLabel:
+                            text: "Click on the text field and press Enter or click the [b]+[/b] button to add the link to the list and saves it with your project. The provided example link [u]https://google.com[/u] should open google.com, you can delete it if you want or open it by clicking the icon button on the left or clicking anywhere besides the delete button."
+                            markup: True
+                            theme_text_color: "Primary"
+                            size_hint: None, None
+                            height: '100dp'
+                            width: '500dp'
+
+                        Label:
+                            size_hint_y: None
+                            height: '20dp'
+
+                        MDLabel:
+                            text: "[size=14][b]Note:[/b] [i]Scrolling with this widget is difficult on this help page but you get the idea of how it works, these links do not save when the app is closed."
+                            markup: True
+                            theme_text_color: "Secondary"
+                            height: '50dp'
+                            width: '400dp'
+                            size_hint: None, None
+                        Label:
+
+                    Label:
+                        size_hint_x: None
+                        width: '50dp'
+
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        size_hint_y: None
+                        height: '200dp'
+
+                        MDBoxLayout:
+                            MDTextField:
+                                id: link_field
+                                hint_text: "Enter url here"
+                                size_hint_x: 1
+                                color_mode: "custom"
+                                hint_text: "Click here to add a url"
+                                line_color_focus: app.theme_cls.text_color
+                                current_hint_text_color: app.theme_cls.primary_color
+                                pos_hint: {'center_y': 0.5}
+                                helper_text_mode: 'on_focus'
+                                helper_text: "Please enter a valid url"
+                                on_text: root.validate_url(self.text)
+                                on_text_validate: root.validate_add(self.text)
+
+                            MDIconButton:
+                                id: add_link_button
+                                icon: 'plus'
+                                pos_hint: {'center_y': 0.5}
+                                on_release: root.add_pressed()
+
+                        ScrollView:
+                            MDStackLayout:
+                                id: links_list
+                                adaptive_height: True
+                                orientation: 'lr-tb'
+
+                Label:

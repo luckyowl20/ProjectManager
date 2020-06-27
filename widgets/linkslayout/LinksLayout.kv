@@ -1,0 +1,65 @@
+<LinkIconListItem>:
+    #text: "test link"
+    on_release: root.open_link()
+    size_hint_x: None
+    width: '400dp'
+    divider: None
+
+    IconLeftWidget:
+        icon: 'open-in-new'
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        on_release: root.open_link()
+
+    DeleteButton:
+        icon: 'delete'
+        on_release: root.delete_link()
+
+<LinksLayout>:
+    link_field: link_field
+    links_list: links_list
+    add_link_button: add_link_button
+
+    orientation: 'vertical'
+    adaptive_height: True
+    #padding: 0, 10
+    MDBoxLayout:
+        size_hint_y: None
+        height: '162dp'
+        orientation: 'vertical'
+
+        MDBoxLayout:
+            orientation: 'horizontal'
+            Label:
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint_x: None
+                width: '450dp'
+                halign: 'left'
+                MDBoxLayout:
+                    orientation: 'horizontal'
+                    MDTextField:
+                        id: link_field
+                        size_hint_x: 1
+                        color_mode: "custom"
+                        hint_text: "Click here to add a url"
+                        line_color_focus: app.theme_cls.text_color
+                        current_hint_text_color: app.theme_cls.primary_color
+                        pos_hint: {'center_y': 0.5}
+                        helper_text_mode: 'on_focus'
+                        helper_text: "Please enter a valid url"
+                        on_text: root.validate_url(self.text)
+                        on_text_validate: root.validate_add(self.text)
+
+                    TooltipMDIconButton:
+                        id: add_link_button
+                        icon: 'plus'
+                        pos_hint: {'center_y': 0.5}
+                        on_release: root.add_pressed()
+
+        ScrollView:
+            MDStackLayout:
+                id: links_list
+                orientation: 'rl-tb'
+                adaptive_height: True
+                #size_hint_y: None
+                #height: '120dp'

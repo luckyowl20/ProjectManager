@@ -1,0 +1,91 @@
+<ContentNavigationDrawer>:
+    id: content_drawer
+    orientation: "vertical"
+    padding: "8dp"
+    spacing: "8dp"
+
+    settings_expansion: settings_expansion
+
+    AnchorLayout:
+        anchor_x: "left"
+        size_hint_y: None
+        height: avatar.height
+
+        Image:
+            id: avatar
+            size_hint: None, None
+            size: "56dp", "56dp"
+            source: "data/logo/kivy-icon-256.png"
+
+    MDLabel:
+        text: "Project manager app"
+        font_style: "Button"
+        size_hint_y: None
+        height: self.texture_size[1]
+        color: app.theme_cls.text_color
+
+    MDLabel:
+        text: "version: 1.0.0"
+        font_style: "Caption"
+        size_hint_y: None
+        height: self.texture_size[1]
+        color: app.theme_cls.text_color
+
+    ColorBar:
+
+    BoxLayout:
+        orientation: 'vertical'
+        #size_hint_y: None
+        #height: '200dp'
+        adaptive_height: True
+        MDLabel:
+            markup: True
+            text: "[b]Projects[/b]"
+            color: app.theme_cls.text_color
+            size_hint_y: None
+            height: self.texture_size[1]
+        Spacer:
+
+        ScrollView:
+
+            MDList:
+                id: md_list
+
+    #Label:
+    MDBoxLayout:
+        orientation: 'vertical'
+        id: settings_layout
+        OneLineIconListItem:
+            text: "Settings"
+            on_release: root.settings_menu()
+            IconLeftWidget:
+                icon: "settings"
+
+        BoxLayout:
+            id: settings_expansion
+            size_hint_y: None
+            height: 0
+
+        OneLineIconListItem:
+            text: "Help"
+            on_release: root.help_menu()
+            IconLeftWidget:
+                icon: "help"
+
+        OneLineIconListItem:
+            text: "About"
+            on_release: root.about_menu()
+            IconLeftWidget:
+                icon: "language-python"
+
+
+
+    MDBoxLayout:
+        orientation: 'horizontal'
+        size_hint_y: None
+        height: close_btn.height
+        Label:
+        MDRaisedButton:
+            id: close_btn
+            text: "CLOSE"
+            on_release: root.nav_drawer.set_state("close")

@@ -1,0 +1,106 @@
+<ImportFilenameContent>:
+    size_hint_y: None
+    height: '400dp'
+    orientation: 'vertical'
+    filename_label: filename_label
+    filename_field: filename_field
+    import_type_label: import_type_label
+
+    MDBoxLayout:
+        size_hint: 1, None
+        height: '2dp'
+        md_bg_color: app.theme_cls.primary_light
+
+    Label:
+        size_hint_y: None
+        height: '20dp'
+
+    MDLabel:
+        id: import_type_label
+        markup: True
+        text: "[b]Import from:[/b]"
+        theme_text_color: "Primary"
+        size_hint_y: None
+        height: '25dp'
+
+    MDLabel:
+        id: filename_label
+        text: "[b]Filename: [/b]"
+        markup: True
+        theme_text_color: "Primary"
+        size_hint_y: None
+        height: '25dp'
+
+    MDSeparator:
+
+    Label:
+        size_hint_y: None
+        height: '20dp'
+
+    MDTextField:
+        id: filename_field
+        hint_text: "Click to edit filename"
+        color_mode: 'custom'
+        line_color_focus: app.theme_cls.text_color
+        current_hint_text_color: app.theme_cls.primary_color
+        pos_hint: {'center_y': 0.5}
+        on_text: root.text_edited(self.text)
+        on_text_validate: root.text_edited(self.text)
+
+    Label:
+
+    MDLabel:
+        text: '[size=14][b]Note:[/b] [i]The filename cannot include any of the following characters: \ / : * ? " < > | or . Using these characters will cause your file to not save and crash Project Manager'
+        theme_text_color: "Secondary"
+        size_hint_y: None
+        height: '75dp'
+        markup: True
+
+<ImportPopupContent>:
+    orientation: 'vertical'
+    size_hint_y: None
+    height: '400dp'
+    import_type_label: import_type_label
+
+    MDBoxLayout:
+        size_hint: 1, None
+        height: '2dp'
+        md_bg_color: app.theme_cls.primary_light
+
+    Label:
+        size_hint_y: None
+        height: '20dp'
+
+    MDLabel:
+        id: import_type_label
+        markup: True
+        text: "[b]Import from:[/b]"
+        theme_text_color: "Primary"
+        size_hint_y: None
+        height: '20dp'
+
+    MDSeparator:
+
+    Label:
+        size_hint_y: None
+        height: "15dp"
+    MDChooseChip:
+        MDChip:
+            label: "Folder"
+            icon: "folder"
+            selected_chip_color: app.theme_cls.primary_light
+            callback: root.import_type_selected
+
+        MDChip:
+            label: ".zip File"
+            icon: "folder-zip"
+            selected_chip_color: app.theme_cls.primary_light
+            callback: root.import_type_selected
+
+        MDChip:
+            label: "Google Drive"
+            icon: "google-drive"
+            selected_chip_color: app.theme_cls.primary_light
+            callback: root.import_type_selected
+
+    Label:

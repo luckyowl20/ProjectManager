@@ -1,0 +1,95 @@
+<GoogleFileEntry>:
+    id: main_label
+    on_release: root.file_selected(self)
+
+    IconLeftWidget:
+        icon: 'folder-zip'
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        on_release: root.file_selected(main_label)
+
+<GoogleImportPopupContent>:
+    file_list: file_list
+    spinner_container: spinner_container
+    selected_file_label: selected_file_label
+
+    # filename edit objects
+    filename_layout: filename_layout
+    original_filename_label: original_filename_label
+    filename_field: filename_field
+
+    size_hint: None, None
+    size: '800dp', '500dp'
+    orientation: 'horizontal'
+
+    MDBoxLayout:
+        orientation: 'vertical'
+
+        MDLabel:
+            text: "[b][u]Select project to download[/u][/b]"
+            theme_text_color: "Primary"
+            markup: True
+            size_hint_y: None
+            height: '20dp'
+
+        MDLabel:
+            id: selected_file_label
+            text: "[b]Selected project: [/b][i]None[/i]"
+            theme_text_color: "Primary"
+            markup: True
+            size_hint_y: None
+            height: '20dp'
+
+        MDBoxLayout:
+            adaptive_height: True
+            id: spinner_container
+            MDSpinner:
+                size_hint: None, None
+                size: dp(46), dp(46)
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+        MDBoxLayout:
+            orientation: 'vertical'
+            # size_hint_x: 0.5
+            ScrollView:
+                MDList:
+                    id: file_list
+
+    Label:
+        size_hint_x: None
+        width: '30dp'
+
+    MDBoxLayout:
+        orientation: 'vertical'
+        id: filename_layout
+        MDLabel:
+            id: original_filename_label
+            text: "[b]Original filename: [/b]"
+            markup: True
+            theme_text_color: "Primary"
+            size_hint_y: None
+            height: '25dp'
+
+        MDSeparator:
+
+        Label:
+            size_hint_y: None
+            height: '20dp'
+
+        MDTextField:
+            id: filename_field
+            hint_text: "Click to edit filename"
+            color_mode: 'custom'
+            line_color_focus: app.theme_cls.text_color
+            current_hint_text_color: app.theme_cls.primary_color
+            pos_hint: {'center_y': 0.5}
+            on_text: root.filename_text_edited(self.text)
+            on_text_validate: root.filename_text_edited(self.text)
+
+        Label:
+
+        MDLabel:
+            text: '[size=14][b]Note:[/b] [i]The filename cannot include any of the following characters: \ / : * ? " < > | or . Using these characters will cause your file to not save and crash Project Manager'
+            theme_text_color: "Secondary"
+            size_hint_y: None
+            height: '75dp'
+            markup: True

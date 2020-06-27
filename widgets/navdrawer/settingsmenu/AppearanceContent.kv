@@ -1,0 +1,134 @@
+<ThemeListItem>:
+    id: item_confirm
+
+    on_release: root.parent_object.set_theme(check, item_confirm.text)
+
+    IconLeftWidget:
+        id: check_icon
+        group: "icons"
+        icon: root.icon
+
+    AppearanceContainer:
+        id: container
+        MDCheckbox:
+            active: root.get_active_theme(item_confirm.text, check)
+            id: check
+            group: 'checkbox'
+            disabled: True
+
+<AppearanceContent>:
+    id: appearance_content
+    orientation: 'vertical'
+    spacing: "12dp"
+    size_hint_y: None
+    height: "400dp"
+    MDBoxLayout:
+        orientation: 'vertical'
+        TwoLineIconListItem:
+            text: "Select a theme for Project Manager"
+            secondary_text: "Themes with a check icon are recommended"
+            IconLeftWidget:
+                icon: "format-color-fill"
+
+        ScrollView:
+            MDList:
+                id: theme_buttons
+                # 19 themes
+                ThemeListItem:
+                    text: "Red"
+                    parent_object: appearance_content
+
+                ThemeListItem:
+                    text: "Pink"
+                    parent_object: appearance_content
+
+                ThemeListItem:
+                    text: "Purple"
+                    parent_object: appearance_content
+                    icon: "check"
+
+                ThemeListItem:
+                    text: "DeepPurple"
+                    parent_object: appearance_content
+
+                ThemeListItem:
+                    text: "Indigo"
+                    parent_object: appearance_content
+
+                ThemeListItem:
+                    text: "Blue"
+                    parent_object: appearance_content
+                    icon: "check"
+
+                ThemeListItem:
+                    text: "LightBlue"
+                    parent_object: appearance_content
+                    icon: "check"
+
+                ThemeListItem:
+                    text: "Cyan"
+                    parent_object: appearance_content
+
+                ThemeListItem:
+                    text: "Teal"
+                    parent_object: appearance_content
+
+                ThemeListItem:
+                    text: "Green"
+                    parent_object: appearance_content
+                    icon: "check"
+
+                ThemeListItem:
+                    text: "LightGreen"
+                    parent_object: appearance_content
+
+                ThemeListItem:
+                    text: "Lime"
+                    parent_object: appearance_content
+
+                ThemeListItem:
+                    text: "Yellow"
+                    parent_object: appearance_content
+
+                ThemeListItem:
+                    text: "Amber"
+                    parent_object: appearance_content
+
+                ThemeListItem:
+                    text: "Orange"
+                    parent_object: appearance_content
+
+                ThemeListItem:
+                    text: "DeepOrange"
+                    parent_object: appearance_content
+
+                ThemeListItem:
+                    text: "Brown"
+                    parent_object: appearance_content
+
+                ThemeListItem:
+                    text: "Gray"
+                    parent_object: appearance_content
+                    icon: "check"
+
+                ThemeListItem:
+                    text: "BlueGray"
+                    parent_object: appearance_content
+                    icon: "check"
+        OneLineAvatarIconListItem:
+            size_hint_y: None
+            height: 5
+
+        OneLineAvatarIconListItem:
+            text: "Use dark mode"
+            IconLeftWidget:
+                icon: "theme-light-dark"
+            StyleContainer:
+                id: style_container
+                MDSwitch:
+                    id: style_switch
+                    active: root.get_theme_style()
+                    size: '40dp', '40dp'
+                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                    active: root.get_theme_style()
+                    on_active: root.set_style(style_switch, root.parent.parent.parent)

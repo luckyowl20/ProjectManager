@@ -1,0 +1,233 @@
+
+<DeleteDialogContent>:
+    orientation: "vertical"
+    spacing: "12dp"
+    size_hint_y: 1
+    height: "120dp"
+
+    MDLabel:
+        text: f"Are you sure you want to delete {root.new_text}?"
+        theme_text_color: "Primary"
+
+
+<ProjectCard>:
+    orientation: 'vertical'
+    padding: '8dp'
+    size_hint: None, None
+    #height: "280dp"
+    size: "290dp", "420dp"
+    id: project_card
+
+    focus_behavior: True
+    ripple_behavior: True
+
+    project_filename: project_filename
+    project_image: project_image
+    image_edit: image_edit
+    home_project_title: home_project_title
+    home_progress_label: home_progress_label
+    home_progress_bar: home_progress_bar
+    home_project_desc: home_project_desc
+    delete_project: delete_project
+    open_project: open_project
+    project_image: project_image
+
+    MDLabel:
+        id: project_filename
+        font_size: '11dp'
+        size_hint: 1, None
+        height: '11dp'
+        theme_text_color: "Secondary"
+        halign: 'left'
+
+    MDFloatLayout:
+        size_hint_y: None
+        height: '150dp'
+        Image:
+            id: project_image
+            pos_hint: {"center_x": 0.4, "center_y": 0.5}
+            source: ""
+            size_hint: 0.8, 0.9
+
+        TooltipMDIconButton:
+            id: image_edit
+            icon: "image-edit"
+            pos_hint: {"center_x": 0.93, "center_y": 0.2}
+            tooltip_text: "Change image"
+            on_release: project_image.source = root.home_page.edit_image(root.project, project_image)
+
+    Label:
+        size_hint_y: None
+        height: 5
+
+    MDLabel:
+        id: home_project_title
+        text: "Project title"
+        theme_text_color: "Secondary"
+        size_hint_y: None
+        text_size: self.width, None
+        height: self.texture_size[1]
+
+    Label:
+        size_hint_y: None
+        height: '2dp'
+
+    MDSeparator:
+        height: '2dp'
+
+    Label:
+        size_hint_y: None
+        height: '2dp'
+
+    MDBoxLayout:
+        size_hint_y: None
+        height: '45dp'
+        orientation: 'horizontal'
+        MDLabel:
+            id: home_progress_label
+            size_hint_x: None
+            width: '60dp'
+            text: "100.0%"
+            theme_text_color: "Primary"
+
+        Label:
+            size_hint_x: None
+            width: '5dp'
+
+        MDProgressBar:
+            id: home_progress_bar
+            value: 0
+            pos_hint: {"center_y": 0.5}
+
+    MDLabel:
+        text: "Project description:"
+        theme_text_color: "Secondary"
+        size_hint_y: None
+        text_size: self.width, None
+        height: self.texture_size[1]
+
+    Label:
+        size_hint_y: None
+        height: '6dp'
+
+    MDLabel:
+        id: home_project_desc
+        text: "Project description here"
+        theme_text_color: "Primary"
+        text_size: self.size
+        valign: 'top'
+
+    MDBoxLayout:
+        size_hint_y: None
+        height: open_project.height
+        TooltipMDIconButton:
+            id: delete_project
+            icon: "delete"
+            tooltip_text: "Delete project"
+            pos_hint: {"center_y": 0.5}
+
+        Label:
+
+        MDRaisedButton:
+            id: open_project
+            text: "OPEN"
+
+
+<HomeSelectPage>:
+    orientation: 'vertical'
+    padding: [8, 4, 8, 8]
+
+    home_title: home_title
+    home_subtitle: home_subtitle
+    card_layout: card_layout
+
+    MDBoxLayout:
+        adaptive_height: True
+        orientation: 'horizontal'
+        canvas.before:
+            Color:
+                rgba: root.get_lighter(app.theme_cls.primary_light, 0.8)
+            RoundedRectangle:
+                pos: self.x - 5, self.y
+                size: self.width + 10, self.height + 5
+                radius: [5]
+        MDLabel:
+            id: home_title
+            font_style: 'H3'
+            text: "Project manager home page"
+            color: app.theme_cls.text_color
+            text_size: self.size[0] - 5, self.size[1]
+            halign: 'left'
+            height: self.font_size * 1.3
+            size_hint: 1, None
+
+    MDBoxLayout:
+        orientation: 'horizontal'
+        adaptive_height: True
+        canvas.before:
+            Color:
+                rgba: root.get_lighter(app.theme_cls.primary_light, 0.6)
+            RoundedRectangle:
+                pos: self.x - 5, self.y
+                size: self.width + 10, self.height
+                radius: [5]
+
+        MDLabel:
+            id: home_subtitle
+            font_style: 'H4'
+            text: "Version: 1.0.0"
+            color: app.theme_cls.text_color
+            text_size: self.size[0] + 5, self.size[1] - 5
+            halign: 'left'
+            height: self.font_size * 1.33
+            size_hint: 1, None
+
+    ScrollView:
+        MDStackLayout:
+            orientation: 'lr-tb'
+            id: card_layout
+            spacing: 15
+            adaptive_height: True
+            padding: 8
+
+
+
+<HomeMenu>:
+    orientation: 'horizontal'
+    adaptive_height: True
+    padding: '10dp'
+    md_bg_color: root.get_bg_color()
+
+    size_hint_y: None
+    height: add_button_layout.height - 80
+    orientation: 'horizontal'
+    MDIconButton:
+        icon: 'menu'
+        on_release: root.app.menu_btn_bind()
+
+    MDLabel:
+        text: "Menu"
+        theme_text_color: "Primary"
+
+    Label:
+
+    MDBoxLayout:
+        id: add_button_layout
+        orientation: 'vertical'
+        adaptive_height: True
+        adaptive_width: True
+        md_bg_color: 1, 1, 1, 0.75
+
+
+        MDIconButton:
+            icon: "plus"
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            user_font_size: 30
+            on_release: root.add_page_from_home()
+
+        MDLabel:
+            text: "Add"
+            #size_hint_y: None
+            #pos: self.x, self.y + 10
+            theme_text_color: "Primary"
+            halign: "center"

@@ -1,0 +1,13 @@
+This is an example project, feel free to delete it at any time.
+
+This is the description field where you can type a simple description about the purpose/recent progress of this project or anything you want!
+
+The file chooser below is best used to browse files, you can open the folder for your project by clicking the open folder button next to the "Project Directory" text. After you open the folder, drag files into it to move them into your project!
+
+In the links section to the right, you can add any link you want as long as it is a valid url!
+
+You will have to expot your own projects to test the import feature.
+
+An important thing to note about this description is it is saved in a .txt file, this means you can easily edit it outside Project Manager and share it without exporting your entire project!
+
+If you need more details about Project Manager, go to the help screen inside the side menu by pressing the Menu button then the Help button. The help menu is incomplete as of version 1.0.0.

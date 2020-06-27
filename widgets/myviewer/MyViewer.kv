@@ -1,0 +1,10 @@
+<MyViewer>:
+    selection: filechooser.selection
+    path: filechooser.path
+    project_path:
+    FileChooserListView:
+        id: filechooser
+        dirselect: True
+        multiselect: True
+        on_selection: root.selection_made(self.selection, self.path)
+        path: self.parent.project_path

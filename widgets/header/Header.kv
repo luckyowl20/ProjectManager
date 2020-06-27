@@ -1,0 +1,81 @@
+<HeaderPopupContent>:
+    orientation: "vertical"
+    spacing: "12dp"
+    size_hint_y: None
+    height: "120dp"
+
+    MDTextField:
+        id: new_field
+        pos: self.parent.pos
+        text: root.new_text
+        hint_text: root.new_hint_text
+        line_color_focus: app.theme_cls.text_color
+
+<Header>:
+    title: title
+    subtitle: subtitle
+    project_filename: project_filename
+
+    orientation: 'vertical'
+    padding: '8dp'
+    adaptive_height: True
+
+    # Title layout
+    MDBoxLayout:
+        adaptive_height: True
+        orientation: 'horizontal'
+        canvas.before:
+            Color:
+                rgba: root.get_lighter(app.theme_cls.primary_light, 0.8)
+            RoundedRectangle:
+                pos: self.x - 5, self.y
+                size: self.width + 10, self.height + 5
+                radius: [5]
+
+        MDLabel:
+            id: title
+            font_style: 'H3'
+            text: "title text"
+            color: app.theme_cls.text_color
+            text_size: self.size[0] - 5, self.size[1]
+            halign: 'left'
+            height: self.font_size * 1.33
+            size_hint: 1, 1
+
+        MDIconButton:
+            icon: "lead-pencil"
+            on_release: root.edit_title()
+
+
+    # Subtitle layout
+    MDBoxLayout:
+        orientation: 'horizontal'
+        adaptive_height: True
+        canvas.before:
+            Color:
+                rgba: root.get_lighter(app.theme_cls.primary_light, 0.6)
+            RoundedRectangle:
+                pos: self.x - 5, self.y
+                size: self.width + 10, self.height
+                radius: [5]
+        MDLabel:
+            id: subtitle
+            font_style: 'H4'
+            text: "subtitle text"
+            color: app.theme_cls.text_color
+            text_size: self.size[0] + 5, self.size[1] - 5
+            halign: 'left'
+            height: self.font_size * 1.33
+            size_hint: 1, None
+
+        MDIconButton:
+            icon: "lead-pencil"
+            on_release: root.edit_subtitle()
+
+    MDLabel:
+        id: project_filename
+        font_size: '11dp'
+        size_hint: 1, None
+        height: '11dp'
+        theme_text_color: "Secondary"
+        halign: 'right'

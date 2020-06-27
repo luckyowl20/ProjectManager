@@ -1,0 +1,8 @@
+<ProjectListItem>:
+
+    on_release:
+        root.drawer.set_state("close")
+        root.window_manager.transition = SwapTransition()
+        root.window_manager.current = root.next_win
+    IconLeftWidget:
+        icon: 'folder'
